@@ -30,9 +30,13 @@ class MemoStore: ObservableObject {
     }
     
     func update(memo: SavedMemo) {
+        print("MemoStore.update が呼ばれました: \(memo.id)")
         if let index = memos.firstIndex(where: { $0.id == memo.id }) {
+            print("インデックス \(index) のメモを更新します")
             memos[index] = memo
             save()
+        } else {
+            print("⚠️ 更新対象のメモが見つかりません")
         }
     }
 
