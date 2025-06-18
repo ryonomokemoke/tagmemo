@@ -38,12 +38,16 @@ struct MemoGroupedListView: View {
                     Section(header: sectionHeader(for: group.date)) {
                         ForEach(group.entries) { memo in
                             memoRow(for: memo)
+                                .listRowInsets(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
+                                .listRowBackground(Color.clear)
+                                .deleteDisabled(editingMemoId != nil)
                         }
-                        .deleteDisabled(editingMemoId != nil)
                     }
                 }
             }
             .listStyle(.plain)
+            .environment(\.editMode, .constant(.inactive))
+            .scrollContentBackground(.hidden)
             .toolbar {
                 ToolbarItem(placement: .keyboard) {
                     keyboardToolbar
